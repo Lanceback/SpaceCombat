@@ -1,5 +1,5 @@
 # SpaceCombat
-A two player game I rigged up in bash. It is not finished yet, I haven't worked out a way to host a game in bash withhout using an external... thing (what's the word?).
+A two player game I rigged up in bash. It is not finished yet, I haven't worked out a way to host a game in bash without using an external... thing (what's the word?).
 
 Hopefully I'll finish it sometime this week.
 
