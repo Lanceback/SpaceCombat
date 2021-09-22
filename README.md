@@ -24,5 +24,9 @@ Backfiring will cause your Plasma Cannon to break and your ship to take 4 damage
 
 Currently, the Plasma Cannon will become available again after 10 turns, I might change this to require you to use Heal to repair it.
 
+Plans:
+  I may just make a dedicated server.
+  I need an ai in the game for singleplayer.
+
 I made this in about an hour. The idea was cool and I didnt want to loose it. I think the complexity kinda got away from me, but it was fun.
 I do intend to finish this and then remake it in python, then maybe Go just because I need more experience in that language. We'll see.
