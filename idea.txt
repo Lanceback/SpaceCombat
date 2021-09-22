@@ -1,0 +1,16 @@
+make connection
+
+three attacks
+	low damage, always hits - deals 1, cooldown 0
+	high damage, takes time (oponent gets warning) - deals 4, cooldown 5
+	high damage, chance to fail and damage self - deals 4, cooldown 2
+
+three support 
+	dodge -  30% chance reduction, cooldown 1
+	shield -  absorbs all damage, cooldown 3
+	heal - heals 3 hp, cooldown 5
+
+both players get 10 health
+
+players each take one action and the server calculates stats
+	
