@@ -174,16 +174,9 @@ do
 		sleep 0.02
 		echo ";:12!*&T^o9h--=+_1~"
 		sleep 0.02
-		echo "-=01-93"
-		sleep 0.01
-		echo "sffg871@GHA__"
-		sleep 0.02
 		echo "**ERROR**"
 		sleep 0.02
-		echo "^%*(*!80XI"
-		sleep 0.02
 		echo "63994/0 [ERROR: -108!#&(*"
-		echo "-=01-93"
 		sleep 0.01
 		echo "sffg871@GHA__"
 		sleep 0.02
@@ -196,11 +189,11 @@ do
 	if [ $isHost -eq 0 ]; then
 		echo -ne $dmg >&3
 		echo "Wait..."
-		read <&3 atk
+		read -n 1 <&3 atk
 	elif [ $isHost -eq 1 ]; then
 		echo -ne $dmg >&3
 		echo "Wait..."
-		read <&3 atk
+		read -n 1 <&3 atk
 		
 	fi
 
