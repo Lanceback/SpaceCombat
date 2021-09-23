@@ -1,19 +1,35 @@
+#!/bin/bash
+
+# Local ship values
 hp=10
 avoid=0
 shield_hp=0
 
+# Vars used for exhange of damage
 dmg=0
 atk=0
 
+# Cooldown timers
 plasma_cd=0
 overheat_cd=0
 shield_cd=0
 heal_cd=0
+
+# is plasma cannon charged?
 plasma_charge=0
 
+# Tells the game who won
 winState=0
 
+# Keeps trak of who is hosting the game
 isHost=0
+
+
+# clear network cconnetions
+pkill ncat
+exec 3<&-
+exec 3>&-
+
 
 echo "*-------------------------------------*"
 echo "Welcome!"
@@ -25,7 +41,9 @@ read choice
 if [ $choice -eq 1 ]; then
 	echo "Hosting Game"
 	isHost=1
-	# find stock alternative to nc if possible
+	(ncat --broker -lp 4444 &)
+	sleep 5
+	exec 3<>/dev/tcp/127.0.0.1/4444
 elif [ $choice -eq 2 ]; then
 	isHost=0
 	echo "IP address of Oponent:"
@@ -44,13 +62,14 @@ do
 	heal_cd=$((heal_cd-1))
 	avoid=$((avoid-1))
 
-	if [ $heal_cd -gt 2 && hp -lt 8 ]; then
+	if [ $heal_cd -gt 2 ] && [ $hp -lt 8 ]; then
 		echo "Nanobot swarms are repairing your ship."
 		hp=$(($hp+1))
-	elif [ $heal_cd -gt 2 && hp -lt 9 ]; then
+	elif [ $heal_cd -gt 2 ] && [ $hp -lt 9 ]; then
 		echo "Nanobot swarms have completely reconstructed ship!"
 		hp=$(($hp+1))
 	fi
+
 	if [ $avoid -gt 0 ]; then
 		echo "Attempting to evade enemy fire!"
 	fi
@@ -169,12 +188,16 @@ do
 		echo "sffg871@GHA__"
 		sleep 0.02
 		echo "**ERROR**"
-		sleep 0.01
+		sleep 0.1
 		echo "**ERROR: Command not recognized! Taking no action.***"
 	fi
 
 	echo "$dmg damage dealt"
 	if [ $isHost -eq 0 ]; then
+		echo -ne $dmg >&3
+		echo "Wait..."
+		read <&3 atk
+	elif [ $isHost -eq 1 ]; then
 		echo -ne $dmg >&3
 		echo "Wait..."
 		read <&3 atk
@@ -198,7 +221,7 @@ do
 
 		if [ $shield_hp -gt 0 ]; then
 			shield_hp=$(($shield_hp-$atk))
-			if [[ $shield_hp -lt 0 ]]; then
+			if [ $shield_hp -lt 0 ]; then
 				hp=$(($hp-${shield_hp#-}))
 				shield_hp=0
 			fi
@@ -222,7 +245,7 @@ do
 
 done
 
-if [ $isHost -eq 0 ]; then
-	exec 3<&-
-	exec 3>&-
-fi
+# close network connections
+pkill ncat
+exec 3<&-
+exec 3>&-
