@@ -1,21 +1,22 @@
 # SpaceCombat
 A two player game I rigged up in bash. 
 
+### Update
 You can now host a game! I ended up using ncat.
 
-Still doesn't quite work, I need to change the way I listen for input from the connection, but it's progress!
+
+## Problems
+Wining a game is not possible yet, I need to fix that.
 
 
+
+## Files
 
 idea.txt is where I wrote down all my notes before I started on it
 
 ship.sh is my attempt to animate some ascii art of a spaceship I found online.
 
-SpaceCombat.sh is the actual game. It will need to be pointed to a tcp server with port 4444 open.
-
-The game will not progress until both players have selected an option.
-
-In the tcp server, you'll have to simulate the script and type a number like 1,0,or 4 to allow the game to progress.
+SpaceCombat.sh is the actual game. 
 
 ## Actions
 There are currently six actions you can take in the game:
@@ -40,14 +41,12 @@ Currently, the Plasma Cannon will become available again after 10 turns, I might
 
 
 ## Plans:
-
-  I may just make a dedicated server.
   
   I need an ai in the game for singleplayer.
   
   Re-make in python for better network communication.
   
-  Compile into platfform specific Applications.
+  Compile into platform specific Applications.
 
 
 
