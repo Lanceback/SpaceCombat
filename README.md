@@ -1,7 +1,7 @@
 # SpaceCombat
 A two player game I rigged up in bash. 
 
-You an now host a game! I ended up using ncat.
+You can now host a game! I ended up using ncat.
 
 Still doesn't quite work, I need to change the way I listen for input from the connection, but it's progress!
 
