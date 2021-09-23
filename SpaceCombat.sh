@@ -35,11 +35,6 @@ elif [ $choice -eq 2 ]; then
 	exec 3<>/dev/tcp/$enemy_ip/4444
 fi
 
-
-
-
-
-
 while [ $winState -eq 0 ]
 do
 	dmg=0
@@ -49,10 +44,20 @@ do
 	heal_cd=$((heal_cd-1))
 	avoid=$((avoid-1))
 
+	if [ $heal_cd -gt 2 && hp -lt 8 ]; then
+		echo "Nanobot swarms are repairing your ship."
+		hp=$(($hp+1))
+	elif [ $heal_cd -gt 2 && hp -lt 9 ]; then
+		echo "Nanobot swarms have completely reconstructed ship!"
+		hp=$(($hp+1))
+	fi
+	if [ $avoid -gt 0 ]; then
+		echo "Attempting to evade enemy fire!"
+	fi
 	if [ $plasma_charge -eq 1 ]; then
-	echo "Plasma Cannon charged up and firing!"
-	plasma_charge=0
-	dmg=$((dmg+4))
+		echo "Plasma Cannon charged up and firing!"
+		plasma_charge=0
+		dmg=$((dmg+4))
 	fi
 	echo "*-------------------------------------*"
 	echo "Health: $hp"
@@ -60,7 +65,7 @@ do
 	sleep 0.2
 	echo "Attack:"
 	sleep 0.1
-	echo "  1: Laser"
+	echo "  1: Laser Pulse"
 	sleep 0.1
 	if [ $plasma_cd -gt 0 ]
 		then
@@ -69,12 +74,7 @@ do
 		echo "  2: Plasma Cannon"
 	fi
 	sleep 0.1
-	if [ $overheat_cd -gt 0 ]
-		then
-		echo "  3: Overheat Plasma Cannon (Cooldown: $overheat_cd)"
-	else
-		echo "  3: Overheat Plasma Cannon"
-	fi
+	echo "  3: Overheat Plasma Cannon"
 	sleep 0.1
 	echo "-----------------"
 	sleep 0.1
@@ -91,9 +91,9 @@ do
 	sleep 0.1
 	if [ $heal_cd -gt 0 ]
 		then
-		echo "  6: Heal (Cooldown $heal_cd)"
+		echo "  6: Repair (Cooldown $heal_cd)"
 	else
-		echo "  6: Heal"
+		echo "  6: Repair"
 	fi
 	sleep 0.1
 	echo "*-------------------------------------*"
@@ -106,21 +106,24 @@ do
 	elif [ $choice -eq 2 ]; then
 		if [ $plasma_cd -gt 0 ]
 		then
-			echo "Safety Protocols Prohibt this action!"
-		echo "Charging Plasma Cannon!"
-		plasma_charge=1
-		plasma_cd=5
+			echo "Safety Protocols prohibt this action!"
+		else
+			echo "Charging Plasma Cannon!"
+			plasma_charge=1
+			plasma_cd=5
+		fi
 	elif [ $choice -eq 3 ]; then
 		echo "Over-riding safety... Firing Plasma Cannon!"
 		sleep 0.1 
 		if [ $((1 + RANDOM % 3)) -eq 1 ]; then
 			echo "The Plasma Cannon backfired!"
 			hp=$(($hp-4))
+			plasma_charge=-1
 			plasma_cd=10
 			overheat_cd=10
 		else
 			echo "Plasma Cannon Fired!"
-			dmg=$((dmg+4))
+			dmg=$((dmg+3))
 			plasma_cd=5
 			overheat_cd=2
 		fi
@@ -128,13 +131,23 @@ do
 		echo "Taking Evasive Action!"
 		avoid=2
 	elif [ $choice -eq 5 ]; then
-		echo "Shields are up!"
-		shield_cd=5
-		shield_hp=5
+		if [ $shield_cd -gt 0 ]
+		then
+			echo "Energy insufficient to charge Shields."
+		else
+			echo "Shields are up!"
+			shield_cd=5
+			shield_hp=5
+		fi
 	elif [ $choice -eq 6 ]; then
-		echo "Repairing..."
-		heal_cd=5
-		hp=$(($hp+3))
+		if [ $shield_cd -gt 0 ]
+		then
+			echo "The Reconstruction Nanobot Swarm is busy."
+		else
+			echo "Repairing..."
+			heal_cd=5
+			hp=$(($hp+2))
+		fi
 	else
 		echo "|;[-=``"
 		sleep 0.02
@@ -175,7 +188,7 @@ do
 				atk=0
 				echo "You dodged the shot!"
 			fi
-		elif [ $avoid -gt 1 ]; then
+		elif [ $avoid -eq 2 ]; then
 			if [ $((1 + RANDOM % 2)) -eq 1 ]; then
 				atk=0
 				echo "You dodged the shot!"
