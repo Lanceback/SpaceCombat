@@ -31,13 +31,13 @@ There are currently six actions you can take in the game:
   6: Repair - Recover 2 hp this turn and 1 hp for the next 2 turns, has a 5 turn cooldown timer.
 
 
-##Backfiring
+### Backfiring
 Backfiring will cause your Plasma Cannon to break and your ship to take 4 damage. I might change this to deal anywhere from 4-8 damage depending on the plasma Cannon's use in the last turn.
 
 Currently, the Plasma Cannon will become available again after 10 turns, I might change this to require you to use the "Repair" ability to repair it.
 
 
-##Plans:
+## Plans:
 
   I may just make a dedicated server.
   
