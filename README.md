@@ -1,7 +1,9 @@
 # SpaceCombat
 A two player game I rigged up in bash. 
 
-Still WiP, singleplayer and joining an existing multiplayer game is not yet implemented. 
+You an now host a game! I ended up using ncat.
+
+Still doesn't quite work, I need to change the way I listen for input from the connection, but it's progress!
 
 
 
