@@ -33,7 +33,7 @@ There are currently six actions you can take in the game:
   
   2: Plasma Cannon - Deals 5 damage to opponent, fires on next turn, and has a 4 turn cooldown timer.
   
-  3: Overheat Plasma Cannon - Fires your Plasma Cannon immediately, deals 3 damage, has a 1/3 chhance off backfiring, and resets Plasma Cannon's cooldown timer.
+  3: Overheat Plasma Cannon - Fires your Plasma Cannon immediately, deals 3 damage, has a 1/3 chance off backfiring, and resets Plasma Cannon's cooldown timer.
   
   4: Dodge - Gives you a 1/2 chance of dodging your opponents attack this turn and 1/3 chance the next, has no cooldown timer.
   
